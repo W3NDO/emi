@@ -10,6 +10,7 @@ defmodule EmiDb.Application do
     children = [
       # Starts a worker by calling: EmiDb.Worker.start_link(arg)
       # {EmiDb.Worker, arg}
+      EmiDb.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

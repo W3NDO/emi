@@ -80,3 +80,10 @@ import_config "#{config_env()}.exs"
 #       format: "$date $time [$level] $metadata$message\n",
 #       metadata: [:user_id]
 #
+
+# Configuring the DB Repo
+config :emi_db, EmiDb.Repo,
+  database: "priv/data/emi_db.sqlite3",
+  pool_size: 5
+
+config :emi_db, ecto_repos: [EmiDb.Repo]
