@@ -18,3 +18,8 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+
+config :emi_db, EmiDb.Repo,
+  pool: Ecto.Adapters.SQL.Sandbox,
+  pool_size: 10
