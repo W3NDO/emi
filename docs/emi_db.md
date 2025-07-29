@@ -73,7 +73,7 @@ For simplicity, we use sqllite by default since this is also what Jellyfin uses.
     - song_writers
     - producing_studio
     - songs (many-to-one)
-    - - musicbrainz-id (unique, null: false)
+    - musicbrainz-id (unique, null: false)
 
 5. Person Info
     - name

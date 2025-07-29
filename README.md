@@ -80,6 +80,7 @@ The umbrella is composed of several apps, each with a clearly defined role:
 ---
 
 ### `emi_db`
+- [x] Workable
 > Shared schemas and Ecto repo
 
 - Provides a central place for defining all database schemas
