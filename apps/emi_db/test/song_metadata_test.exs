@@ -1,7 +1,6 @@
 defmodule SongMetadataTest do
   use ExUnit.Case, async: true
   alias EmiDb.{SongMetadata, Repo}
-  import Ecto.Query
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -18,13 +17,12 @@ defmodule SongMetadataTest do
       musicbrainz_id: "c9fdb94c-4975-4ed6-a96f-ef6d80bb7738"
     }
 
-    {:ok, existing_song} = Repo.insert(SongMetadata.changeset(%SongMetadata{}, song_attrs))
+    {:ok, _existing_song} = Repo.insert(SongMetadata.changeset(%SongMetadata{}, song_attrs))
 
-    {:ok, song_attrs: song_attrs, existing_song: existing_song}
+    {:ok, song_attrs: song_attrs}
   end
 
   test "Ensure uniqueness of Musicbrainz ID", %{
-    existing_song: existing_song,
     song_attrs: song_attrs
   } do
     changeset = SongMetadata.changeset(%SongMetadata{}, song_attrs)

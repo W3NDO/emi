@@ -1,7 +1,6 @@
 defmodule VisualMediaTest do
   use ExUnit.Case, async: true
   alias EmiDb.{VisualMedia, Repo}
-  import Ecto.Query
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -21,14 +20,13 @@ defmodule VisualMediaTest do
       imdb_id: "tt0245429"
     }
 
-    {:ok, existing_visual_media} =
+    {:ok, _existing_visual_media} =
       Repo.insert(VisualMedia.changeset(%VisualMedia{}, visual_media_attrs))
 
-    {:ok, existing_visual_media: existing_visual_media, visual_media_attrs: visual_media_attrs}
+    {:ok, visual_media_attrs: visual_media_attrs}
   end
 
   test "Ensure uniqueness of IMDB ID", %{
-    existing_visual_media: existing_visual_media,
     visual_media_attrs: visual_media_attrs
   } do
     changeset = VisualMedia.changeset(%VisualMedia{}, visual_media_attrs)

@@ -1,7 +1,6 @@
 defmodule UserTest do
   use ExUnit.Case, async: true
   alias EmiDb.{User, Repo}
-  import Ecto.Query
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)

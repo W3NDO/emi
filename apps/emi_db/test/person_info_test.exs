@@ -1,7 +1,6 @@
 defmodule PersonInfoTest do
   use ExUnit.Case, async: true
   alias EmiDb.{PersonInfo, Repo}
-  import Ecto.Query
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -22,13 +21,12 @@ defmodule PersonInfoTest do
       awards: ""
     }
 
-    {:ok, existing_person} = Repo.insert(PersonInfo.changeset(%PersonInfo{}, person_attrs))
+    {:ok, _existing_person} = Repo.insert(PersonInfo.changeset(%PersonInfo{}, person_attrs))
 
-    {:ok, existing_person: existing_person, person_attrs: person_attrs}
+    {:ok, person_attrs: person_attrs}
   end
 
   test "Ensure uniqueness of IMDB id", %{
-    existing_person: existing_person,
     person_attrs: person_attrs
   } do
     changeset = PersonInfo.changeset(%PersonInfo{}, person_attrs)
