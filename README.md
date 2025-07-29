@@ -25,7 +25,7 @@ It is a modular, umbrella-structured media server built using Elixir and Phoenix
 The umbrella is composed of several apps, each with a clearly defined role:
 
 ### `emi_web`
-> The Phoenix interface (LiveView or JSON API)
+> The Phoenix interface (LiveView & JSON API)
 
 - Responsible for routing, rendering views, and serving assets
 - Receives user interactions and delegates to other apps
@@ -108,5 +108,5 @@ Live updates are powered by Phoenix Channels and PubSub.
 
 To extend the system (e.g., add device sync, external metadata APIs), add new umbrella apps with clean interfaces.
 
-
-
+### TBD
+figure out how to use the (membrane framework)[https://membrane.stream/].
