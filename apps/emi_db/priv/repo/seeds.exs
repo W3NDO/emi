@@ -116,7 +116,8 @@ visual_media_entries = [
     backdrop_url: "https://example.com/spirited_away.jpg",
     keywords: "spirits, bathhouse, adventure",
     rating: "PG",
-    tags: "anime, fantasy, coming-of-age"
+    tags: "anime, fantasy, coming-of-age",
+    imdb_id: "tt0245429"
   },
   %VisualMedia{
     title: "Inception",
@@ -129,7 +130,8 @@ visual_media_entries = [
     backdrop_url: "https://example.com/inception.jpg",
     keywords: "dreams, subconscious, heist",
     rating: "PG-13",
-    tags: "thriller, sci-fi, mind-bending"
+    tags: "thriller, sci-fi, mind-bending",
+    imdb_id: "tt0245428"
   },
   %VisualMedia{
     title: "Parasite",
@@ -142,7 +144,8 @@ visual_media_entries = [
     backdrop_url: "https://example.com/parasite.jpg",
     keywords: "class, deception, family",
     rating: "R",
-    tags: "drama, satire, thriller"
+    tags: "drama, satire, thriller",
+    imdb_id: "tt0245421"
   },
   %VisualMedia{
     title: "The Matrix",
@@ -155,7 +158,8 @@ visual_media_entries = [
     backdrop_url: "https://example.com/matrix.jpg",
     keywords: "simulation, hacker, rebellion",
     rating: "R",
-    tags: "sci-fi, action, cyberpunk"
+    tags: "sci-fi, action, cyberpunk",
+    imdb_id: "tt0245422"
   },
   %VisualMedia{
     title: "Your Name",
@@ -168,7 +172,8 @@ visual_media_entries = [
     backdrop_url: "https://example.com/your_name.jpg",
     keywords: "body swap, connection, memory",
     rating: "PG",
-    tags: "romance, anime, fantasy"
+    tags: "romance, anime, fantasy",
+    imdb_id: "tt0245423"
   }
 ]
 
@@ -185,7 +190,8 @@ song_metadata = [
     tags: "anime,naruto,opener",
     genres: "J-pop,Rock",
     poster_url: "https://example.com/blue_bird.jpg",
-    producing_studio: "Sony Music Japan"
+    producing_studio: "Sony Music Japan",
+    musicbrainz_id: "c9fdb94c-4975-4ed6-a96f-ef6d80bb7735"
   },
   %SongMetadata{
     title: "Unravel",
@@ -195,7 +201,8 @@ song_metadata = [
     tags: "anime,tokyo ghoul",
     genres: "Alternative Rock",
     poster_url: "https://example.com/unravel.jpg",
-    producing_studio: "Sony Music Records"
+    producing_studio: "Sony Music Records",
+    musicbrainz_id: "c9fdb94c-4975-4ed6-a96f-ef6d80bb7734"
   },
   %SongMetadata{
     title: "Gurenge",
@@ -205,7 +212,8 @@ song_metadata = [
     tags: "anime,demon slayer",
     genres: "Pop Rock",
     poster_url: "https://example.com/gurenge.jpg",
-    producing_studio: "SACRA MUSIC"
+    producing_studio: "SACRA MUSIC",
+    musicbrainz_id: "c9fdb94c-4975-4ed6-a96f-ef6d80bb7733"
   },
   %SongMetadata{
     title: "Tank!",
@@ -215,7 +223,8 @@ song_metadata = [
     tags: "anime,cowboy bebop,jazz",
     genres: "Jazz,Big Band",
     poster_url: "https://example.com/tank.jpg",
-    producing_studio: "Victor Entertainment"
+    producing_studio: "Victor Entertainment",
+    musicbrainz_id: "c9fdb94c-4975-4ed6-a96f-ef6d80bb7732"
   },
   %SongMetadata{
     title: "Silhouette",
@@ -225,7 +234,8 @@ song_metadata = [
     tags: "anime,naruto shippuden",
     genres: "Rock",
     poster_url: "https://example.com/silhouette.jpg",
-    producing_studio: "Toy's Factory"
+    producing_studio: "Toy's Factory",
+    musicbrainz_id: "c9fdb94c-4975-4ed6-a96f-ef6d80bb7731"
   }
 ]
 

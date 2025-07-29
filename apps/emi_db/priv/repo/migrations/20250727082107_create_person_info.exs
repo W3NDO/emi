@@ -17,5 +17,7 @@ defmodule EmiDb.Repo.Migrations.CreatePersonInfo do
 
       timestamps()
     end
+
+    create index(:person_info, [:imdb_id], unique: true)
   end
 end

@@ -21,6 +21,7 @@ For simplicity, we use sqllite by default since this is also what Jellyfin uses.
 
     #### Fields
     - title
+    - imdb-id (unique, null: false)
     - type (Movie, Episode)
     - original title
     - synopsis
@@ -61,6 +62,7 @@ For simplicity, we use sqllite by default since this is also what Jellyfin uses.
     - poster_url
     - backdrop_url
     - producing studio
+    - musicbrainz-id (unique, null: false)
 
 4. Album Metadata
     - title
@@ -71,6 +73,7 @@ For simplicity, we use sqllite by default since this is also what Jellyfin uses.
     - song_writers
     - producing_studio
     - songs (many-to-one)
+    - - musicbrainz-id (unique, null: false)
 
 5. Person Info
     - name
@@ -81,6 +84,6 @@ For simplicity, we use sqllite by default since this is also what Jellyfin uses.
     - aliases
     - gender
     - image_url
-    - imdb_id
+    - imdb_id (Unique, null: false)
     - social_links
     - awards

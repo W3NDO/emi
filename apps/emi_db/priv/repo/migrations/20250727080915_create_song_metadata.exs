@@ -11,8 +11,11 @@ defmodule EmiDb.Repo.Migrations.CreateSongMetadata do
       add :genres, :string
       add :poster_url, :string
       add :producing_studio, :string
+      add :musicbrainz_id, :string
 
       timestamps()
     end
+
+    create index(:song_metadata, [:musicbrainz_id], unique: true)
   end
 end

@@ -3,18 +3,18 @@ defmodule EmiDb.VisualMedia do
   import Ecto.Changeset
 
   schema "visual_media" do
-    field :title, :string
-    field :original_title, :string
-    field :synopsis, :string
-    field :release_date, :utc_datetime
-    field :language, :string
-    field :country, :string
-    field :status, :string
-    field :backdrop_url, :string
-    field :keywords, :string
-    field :rating, :string
-    field :tags, :string
-
+    field(:title, :string)
+    field(:original_title, :string)
+    field(:synopsis, :string)
+    field(:release_date, :utc_datetime)
+    field(:language, :string)
+    field(:country, :string)
+    field(:status, :string)
+    field(:backdrop_url, :string)
+    field(:keywords, :string)
+    field(:rating, :string)
+    field(:tags, :string)
+    field(:imdb_id, :string)
 
     # field :video_codec, :string
     # field :audio_codec, :string
@@ -35,7 +35,21 @@ defmodule EmiDb.VisualMedia do
 
   def changeset(visual_media, attrs) do
     visual_media
-    |> cast(attrs, [:title, :original_title, :synopsis, :release_date, :language, :country, :status, :backdrop_url, :keywords, :rating, :tags])
+    |> cast(attrs, [
+      :title,
+      :original_title,
+      :synopsis,
+      :release_date,
+      :language,
+      :country,
+      :status,
+      :backdrop_url,
+      :keywords,
+      :rating,
+      :tags,
+      :imdb_id
+    ])
     |> validate_required([:title])
+    |> unique_constraint([:imdb_id])
   end
 end

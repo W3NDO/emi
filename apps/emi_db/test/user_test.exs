@@ -5,14 +5,16 @@ defmodule UserTest do
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
-    existing_username =  Faker.Internet.user_name
-    {:ok, existing_user} = Repo.insert(User.changeset(%User{}, %{username: existing_username, role: "user"}))
+    existing_username = Faker.Internet.user_name()
+
+    {:ok, existing_user} =
+      Repo.insert(User.changeset(%User{}, %{username: existing_username, role: "user"}))
 
     {:ok, existing_user: existing_user, existing_username: existing_username}
   end
 
   test "inserts a record" do
-    username = Faker.Internet.user_name
+    username = Faker.Internet.user_name()
     changeset = User.changeset(%User{}, %{username: username, role: "admin"})
     {:ok, user} = Repo.insert(changeset)
 
@@ -47,7 +49,9 @@ defmodule UserTest do
     changeset = User.changeset(%User{}, duplicate_attrs)
 
     assert {:error, changeset} = Repo.insert(changeset)
-    assert changeset.errors[:username] == {"has already been taken", [constraint: :unique, constraint_name: "users_username_index"]}
 
+    assert changeset.errors[:username] ==
+             {"has already been taken",
+              [constraint: :unique, constraint_name: "users_username_index"]}
   end
 end

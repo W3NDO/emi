@@ -3,8 +3,8 @@ defmodule EmiDb.User do
   import Ecto.Changeset
 
   schema "users" do
-    field :username, :string
-    field :role, :string
+    field(:username, :string)
+    field(:role, :string)
 
     timestamps()
   end

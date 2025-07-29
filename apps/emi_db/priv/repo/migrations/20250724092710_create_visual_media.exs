@@ -14,9 +14,12 @@ defmodule EmiDb.Repo.Migrations.CreateVisualMedia do
       add :keywords, :text
       add :rating, :string
       add :tags, :string
+      add :imdb_id, :string
 
       timestamps()
     end
+
+    create index(:visual_media, [:imdb_id], unique: true)
   end
 
 end
