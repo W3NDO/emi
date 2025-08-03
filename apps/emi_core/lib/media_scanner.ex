@@ -1,4 +1,4 @@
-defmodule FileScanner do
+defmodule MediaScanner do
   defp directory_exists?(path) do
     case File.dir?(path) do
       true -> {:ok, path}
@@ -6,10 +6,11 @@ defmodule FileScanner do
     end
   end
 
+  @spec get_dir_entries(Path.t()) :: list()
   def get_dir_entries(path) do
     {:ok, entries} =
       if {:ok, path} = directory_exists?(path) do
-        {:ok, entries} = File.ls(path)
+        {:ok, _entries} = File.ls(path)
       else
         {:error, "Directory does not exist."}
       end
