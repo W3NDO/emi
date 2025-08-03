@@ -1,5 +1,4 @@
 defmodule MediaBehaviour do
-
   @doc """
   lists allowed file types for this media type.
   """

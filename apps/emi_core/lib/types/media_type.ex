@@ -48,5 +48,4 @@ defmodule Types.MediaType do
   defp formats_for(:show), do: {:ok, [:mp4, :mov, :avi, :mkv]}
   defp formats_for(:album), do: {:ok, [:mp3, :flac, :aac]}
   defp formats_for(_), do: {:error, :unsupported_format}
-
 end
