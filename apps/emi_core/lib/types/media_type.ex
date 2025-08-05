@@ -1,5 +1,5 @@
 defmodule Types.MediaType do
-  @behaviour MediaBeaviour
+  @behaviour MediaBehaviour
   @typedoc """
   This is a struct that will specify the type info about media. Should probably become a behaviour implementation.
 

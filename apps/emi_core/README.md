@@ -1,21 +1,18 @@
 # EmiCore
 
-**TODO: Add description**
+## Media
+Provides elixir structs for manipulating and working with scanned media directories.
 
-## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `emi_core` to your list of dependencies in `mix.exs`:
+## Scanner
+Scans provided directories and uses the media API to build elixir structs of media.
+Forwards the data to the metadata fetcher in order to fetch metadata from IMDB, Musicbrainz etc
 
-```elixir
-def deps do
-  [
-    {:emi_core, "~> 0.1.0"}
-  ]
-end
-```
+## Metadata Fetcher
+Manages a queue of data requests to TMDB and others. TMDB is cheaper than IMDB so, we use that instead. 
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/emi_core>.
+[TMDB API Docs](https://developer.themoviedb.org/docs/getting-started)
+
+## Query
+Persists the info from MetadataFetcher and Scanner.
 
