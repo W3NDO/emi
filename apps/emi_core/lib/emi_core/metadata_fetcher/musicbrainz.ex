@@ -3,7 +3,12 @@ defmodule EmiCore.MetadataFetcher.Musicbrainz do
   @behaviour Fetcher
 
   @impl Fetcher
-  def request(url, body) do
+  def build_request(url, body) do
     %{}
+  end
+
+  @impl Fetcher
+  def make_request(request) do
+    {:ok, %{}}
   end
 end
