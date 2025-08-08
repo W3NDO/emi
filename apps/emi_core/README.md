@@ -45,6 +45,12 @@ Manages a queue of data requests to TMDB and others. TMDB is cheaper than IMDB s
 }
 ```
 
+## Musicbrainz
+- Does not require an API Key, but they are rate limited, we need to find a way to batch requests or at the very least implement request rate limiting.
+- [Docs](https://musicbrainz.org/doc/MusicBrainz_API/Search)
+- We search for artists and recordings. `/artist` and `/recording`
+- the only important query params here are the query itself and the format `fmt`. We use JSON 
+
 ## Query
 Persists the info from MetadataFetcher and Scanner.
 
