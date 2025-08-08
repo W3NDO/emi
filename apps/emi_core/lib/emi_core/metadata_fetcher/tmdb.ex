@@ -2,7 +2,9 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
   @behaviour Fetcher
   alias EmiCore.MetadataFetcher.Fetcher
 
-  @base_url URI.parse("https://api.themoviedb.org/3/search")
+  @movie_base_path URI.parse("https://api.themoviedb.org/3/search/movie")
+  @tv_base_path URI.parse("https://api.themoviedb.org/3/search/tv")
+  @multi_base_path URI.parse("https://api.themoviedb.org/3/search/multi")
 
   @type media_type :: :movie | :show | nil
   @type query_params :: %{
@@ -30,7 +32,7 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
   @impl Fetcher
   @spec build_request(query_params(), media_type(), map) :: %Req.Request{}
   def build_request(query_params, media_type, options) do
-    url = build_url(@base_url, media_type, query_params)
+    url = build_url(media_type, query_params)
     Req.Request.new(url: url, headers: options.headers)
   end
 
@@ -49,16 +51,13 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
     end
   end
 
-  defp build_url(base_url, media_type, query_params) do
-    media_type =
+  defp build_url(media_type, query_params) do
+    path =
       case media_type do
-        :movie -> "movie"
-        :show -> "tv"
-        _ -> "multi"
+        :movie -> @movie_base_path
+        :show -> @tv_base_path
+        _ -> @multi_base_path
       end
-
-    "#{base_url}" <>
-      "/#{media_type}?" <>
-      "#{Enum.map(query_params, fn {k, v} -> "#{k}=#{v}" end) |> Enum.join("&")}"
+    %URI{path | query: URI.encode_query(query_params)}
   end
 end

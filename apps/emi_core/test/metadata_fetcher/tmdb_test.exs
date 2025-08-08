@@ -17,18 +17,20 @@ defmodule MetadataFetcher.TmdbTest do
       query_params: query_params,
       options: options
     } do
-      assert URI.parse(
+      expected_uri = URI.parse(
                "https://api.themoviedb.org/3/search/movie?query=avatar&language=en-UK&include_adult=true"
-             ) == Tmdb.build_request(query_params, :movie, options).url
+             )
+      assert expected_uri = Tmdb.build_request(query_params, :movie, options).url
     end
 
     test "generated URL is correct with query params and no media type", %{
       query_params: query_params,
       options: options
     } do
-      assert URI.parse(
+      expected_uri = URI.parse(
                "https://api.themoviedb.org/3/search/multi?query=avatar&language=en-UK&include_adult=true"
-             ) == Tmdb.build_request(query_params, nil, options).url
+             )
+      assert expected_uri = Tmdb.build_request(query_params, nil, options).url
     end
 
     test "generated URL is correct with query params and tv show media type", %{
