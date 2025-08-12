@@ -7,7 +7,7 @@ defmodule EmiCore.MetadataFetcher.Fetcher do
   @doc """
   Creates a Req.Request object with the URL, query_params, header options passed as a map. Returns a request object
   """
-  @callback build_request(map, map) :: %Req.Request{}
+  @callback build_request(map, atom | nil) :: %Req.Request{}
 
   @doc """
     Actually makes the request and returns either {:ok, body} or {:error, status_code}

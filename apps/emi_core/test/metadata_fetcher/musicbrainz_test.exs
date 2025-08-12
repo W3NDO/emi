@@ -43,21 +43,21 @@ defmodule MetadataFetcher.MusicbrainzTest do
     end
 
     test "Not found error, {:404, :not_found}", %{mock_mod: mock_mod, req: req} do
-      expect(MockFetcher, :make_request, fn req_obj -> {:error, :not_found} end)
+      expect(MockFetcher, :make_request, fn _req_obj -> {:error, :not_found} end)
 
       assert mock_mod.make_request(req) == {:error, :not_found}
     end
 
     test "server error, {:500, :server_error}", %{mock_mod: mock_mod, req: req} do
-      expect(MockFetcher, :make_request, fn req_obj -> {:error, :server_error} end)
+      expect(MockFetcher, :make_request, fn _req_obj -> {:error, :server_error} end)
 
       assert mock_mod.make_request(req) == {:error, :server_error}
     end
 
     test "Other errors, {:error, _}", %{mock_mod: mock_mod, req: req} do
-      expect(MockFetcher, :make_request, fn req_obj -> {:error, 422} end)
+      expect(MockFetcher, :make_request, fn _req_obj -> {:error, 422} end)
 
-      assert mock_mod.make_request(req) == {:error, 422 }
+      assert mock_mod.make_request(req) == {:error, 422}
     end
   end
 end

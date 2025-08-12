@@ -32,7 +32,7 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
   """
   @impl Fetcher
   @spec build_request(query_params(), media_type()) :: %Req.Request{}
-  def build_request(query_params_and_options, media_type) do
+  def build_request(query_params_and_options, media_type \\ nil) do
     {query_params, options} =
       Map.split(query_params_and_options, [
         :query,
@@ -74,6 +74,7 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
         _ -> @multi_base_path
       end
 
+    # because the multi endpoint gives us the media type with the search, we could in fact just use the multipath
     %URI{path | query: URI.encode_query(query_params)}
   end
 end

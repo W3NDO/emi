@@ -17,7 +17,7 @@ defmodule EmiCore.MetadataFetcher.Musicbrainz do
     We use JSON return by default.
   """
   @impl Fetcher
-  def build_request(query_params, artist_or_recording) do
+  def build_request(query_params, artist_or_recording \\ nil) do
     url = build_url(artist_or_recording, query_params.query)
     Req.Request.new(url: url)
   end

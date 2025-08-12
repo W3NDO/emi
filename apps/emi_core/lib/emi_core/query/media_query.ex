@@ -1,6 +1,55 @@
 defmodule EmiCore.Query.MediaQuery do
-  # alias EmiDb.VisualMedia
+  alias EmiDb.{Repo, VisualMedia}
   # alias EmiDb.SongMetadata
   # alias EmiCore.MetadataFetcher.Tmdb
   # alias EmiCore.MetadataFetcher.Musicbrainz
+
+  @original_image_base_path "https://image.tmdb.org/t/p/orginal"
+  # @width_500_image_base_path "https://image.tmdb.org/t/p/w500"
+  @doc """
+  The media specifier here refers to an atom specifying if it is visual or audio
+  """
+  @spec insert_to_repo(map, atom) :: {:ok, integer} | {:error, list}
+  def insert_to_repo(response_body, media_specifier) do
+    changeset =
+      case media_specifier do
+        :visual -> response_body |> format_visual_media_attrs |> create_chageset(media_specifier)
+        _ -> {:ok, :bye}
+      end
+
+    Repo.insert(changeset)
+
+    # TODO after this we need to trigger a background job to fetch the specific information about the media and update the data.
+  end
+
+  defp format_visual_media_attrs(media_attrs) do
+    media_attrs
+    |> Map.update!(:release_date, fn _ -> to_utc_datetime!(media_attrs.release_date) end)
+    |> Map.update!(:backdrop_path, fn _ -> expand_paths(media_attrs.backdrop_path) end)
+    |> Map.update!(:poster_path, fn _ -> expand_paths(media_attrs.poster_path) end)
+    |> update_id_key(:tmdb)
+  end
+
+  defp create_chageset(attrs, model) do
+    case model do
+      :visual -> VisualMedia.changeset(%VisualMedia{}, attrs)
+      _ -> {:ok, :bye}
+    end
+  end
+
+  defp to_utc_datetime!(date_string) do
+    {:ok, datetime, _} = DateTime.from_iso8601("#{date_string}T00:00:00Z")
+    datetime
+  end
+
+  defp expand_paths(path) do
+    @original_image_base_path <> path
+  end
+
+  defp update_id_key(attr_map, source) do
+    case source do
+      :tmdb -> Map.put_new(attr_map, :tmdb_id, "#{attr_map.id}")
+      _ -> {:ok, :bye}
+    end
+  end
 end
