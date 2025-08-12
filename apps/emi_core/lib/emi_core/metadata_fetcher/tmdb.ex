@@ -1,5 +1,5 @@
 defmodule EmiCore.MetadataFetcher.Tmdb do
-  @behaviour Fetcher
+  @behaviour EmiCore.MetadataFetcher.Fetcher
   alias EmiCore.MetadataFetcher.Fetcher
 
   @movie_base_path URI.parse("https://api.themoviedb.org/3/search/movie")
@@ -14,7 +14,8 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
           primary_release_year: String.t(),
           page: integer(),
           region: String.t(),
-          year: String.t()
+          year: String.t(),
+          options: map()
         }
 
   @doc """
@@ -30,10 +31,21 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
       - year                      : string
   """
   @impl Fetcher
-  @spec build_request(query_params(), media_type(), map) :: %Req.Request{}
-  def build_request(query_params, media_type, options) do
+  @spec build_request(query_params(), media_type()) :: %Req.Request{}
+  def build_request(query_params_and_options, media_type) do
+    {query_params, options} =
+      Map.split(query_params_and_options, [
+        :query,
+        :include_adult,
+        :language,
+        :primary_release_year,
+        :page,
+        :region,
+        :year
+      ])
+
     url = build_url(media_type, query_params)
-    Req.Request.new(url: url, headers: options.headers)
+    Req.Request.new(url: url, headers: options.options.headers)
   end
 
   @doc """
@@ -41,12 +53,15 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
 
   """
   @impl Fetcher
-  @spec make_request(%Req.Request{}) :: {:ok, map} | {:error, integer}
+  @spec make_request(%Req.Request{}) :: {:ok, map} | {:error, integer} | {:error, atom}
   def make_request(req) do
-    {req, response} = Req.Request.run_request(req)
+    {_req, response} = Req.Request.run_request(req)
 
     case response.status do
       200 -> {:ok, response.body}
+      404 -> {:error, :not_found}
+      500 -> {:error, :server_error}
+      401 -> {:error, :unauthorised}
       _ -> {:error, response.status}
     end
   end
@@ -58,6 +73,7 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
         :show -> @tv_base_path
         _ -> @multi_base_path
       end
+
     %URI{path | query: URI.encode_query(query_params)}
   end
 end

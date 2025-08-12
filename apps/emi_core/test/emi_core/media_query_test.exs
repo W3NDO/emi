@@ -19,6 +19,5 @@ defmodule EmiCore.QueryTest do
     test "creates a list of audio media changesets and inserts them in batch " do
       assert false == true
     end
-
   end
 end

@@ -5,9 +5,9 @@ defmodule EmiCore.MetadataFetcher.Musicbrainz do
   @song_base_path URI.parse("http://musicbrainz.org/ws/2/recording/")
 
   @type query_params :: %{
-    query: String.t(),
-    fmt: String.t(),
-  }
+          query: String.t(),
+          fmt: String.t()
+        }
 
   @doc """
     https://musicbrainz.org/doc/MusicBrainz_API/Search
@@ -25,7 +25,7 @@ defmodule EmiCore.MetadataFetcher.Musicbrainz do
   @impl Fetcher
   @spec make_request(%Req.Request{}) :: {:ok, map} | {:error, integer}
   def make_request(request) do
-    {req, response} = Req.Request.run_request(request)
+    {_req, response} = Req.Request.run_request(request)
 
     case response.status do
       200 -> {:ok, response.body}
@@ -38,7 +38,7 @@ defmodule EmiCore.MetadataFetcher.Musicbrainz do
       case artist_or_recording do
         :artist -> @artist_base_path
         :recording -> @song_base_path
-        _ -> @song_path
+        _ -> @song_base_path
       end
 
     query_params = %{

@@ -1,3 +1,3 @@
 defmodule EmiCore.Media.MediaStore do
-  alias EmiDb.VisualMedia
+  # alias EmiDb.VisualMedia
 end

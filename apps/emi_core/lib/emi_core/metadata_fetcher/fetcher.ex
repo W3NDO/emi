@@ -13,4 +13,7 @@ defmodule EmiCore.MetadataFetcher.Fetcher do
     Actually makes the request and returns either {:ok, body} or {:error, status_code}
   """
   @callback make_request(%Req.Request{}) :: {:ok, map} | {:error, integer}
+
+  # def make_requests(req_struct), do: impl().make_request(req_struct)
+  # defp impl, do: Application.get_env(:emi_core, :make_request, EmiCore.MetadataFetcher.Fetcher)
 end
