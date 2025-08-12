@@ -29,6 +29,8 @@ defmodule EmiCore.MetadataFetcher.Musicbrainz do
 
     case response.status do
       200 -> {:ok, response.body}
+      404 -> {:error, :not_found}
+      500 -> {:error, :server_error}
       _ -> {:error, response.status}
     end
   end
