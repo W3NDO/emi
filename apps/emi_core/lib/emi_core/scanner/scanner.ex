@@ -8,9 +8,9 @@ defmodule EmiCore.Scanner.Scanner do
   end
 
   def build_media_structs(path) do
-    name = Path.basename(path)
-    path = Path.expand(path)
     type = Path.extname(path)
+    name = Path.basename(path, type)
+    path = Path.expand(path)
     size = File.stat!(path).size
 
     Media.new(name, path, type, size)

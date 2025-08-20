@@ -58,11 +58,21 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
     {_req, response} = Req.Request.run_request(req)
 
     case response.status do
-      200 -> {:ok, response.body}
-      404 -> {:error, :not_found}
-      500 -> {:error, :server_error}
-      401 -> {:error, :unauthorised}
-      _ -> {:error, response.status}
+      200 ->
+        {:ok, body} = Jason.decode(response.body)
+        {:ok, body["results"] |> hd()}
+
+      404 ->
+        {:error, :not_found}
+
+      500 ->
+        {:error, :server_error}
+
+      401 ->
+        {:error, :unauthorised}
+
+      _ ->
+        {:error, response.status}
     end
   end
 
@@ -71,6 +81,7 @@ defmodule EmiCore.MetadataFetcher.Tmdb do
       case media_type do
         :movie -> @movie_base_path
         :show -> @tv_base_path
+        :multi -> @multi_base_path
         _ -> @multi_base_path
       end
 

@@ -8,7 +8,7 @@
 ## Audio Media
 - [ ] we need to implement rate limiting.
 - [ ] update schema
-- [ ]
+- [ ] Perhaps we should schedule this to V2 of the app. Focus on visual media for now. 
 
 ---
 

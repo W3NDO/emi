@@ -1,10 +1,10 @@
 defmodule EmiCore.Query.MediaQuery do
   alias EmiDb.{Repo, VisualMedia}
-  # alias EmiDb.SongMetadata
+  alias EmiDb.AudioMedia
   # alias EmiCore.MetadataFetcher.Tmdb
   # alias EmiCore.MetadataFetcher.Musicbrainz
 
-  @original_image_base_path "https://image.tmdb.org/t/p/orginal"
+  @original_image_base_path "https://image.tmdb.org/t/p/original"
   # @width_500_image_base_path "https://image.tmdb.org/t/p/w500"
   @doc """
   The media specifier here refers to an atom specifying if it is visual or audio
@@ -13,7 +13,8 @@ defmodule EmiCore.Query.MediaQuery do
   def insert_to_repo(response_body, media_specifier) do
     changeset =
       case media_specifier do
-        :visual -> response_body |> format_visual_media_attrs |> create_chageset(media_specifier)
+        :visual -> response_body |> format_visual_media_attrs |> create_changeset(media_specifier)
+        :audio -> response_body |> format_audio_media_attrs |> create_changeset(media_specifier)
         _ -> {:ok, :bye}
       end
 
@@ -24,15 +25,20 @@ defmodule EmiCore.Query.MediaQuery do
 
   defp format_visual_media_attrs(media_attrs) do
     media_attrs
-    |> Map.update!(:release_date, fn _ -> to_utc_datetime!(media_attrs.release_date) end)
-    |> Map.update!(:backdrop_path, fn _ -> expand_paths(media_attrs.backdrop_path) end)
-    |> Map.update!(:poster_path, fn _ -> expand_paths(media_attrs.poster_path) end)
+    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+    |> Map.update!(:release_date, fn _ -> to_utc_datetime!(media_attrs["release_date"]) end)
+    |> Map.update!(:backdrop_path, fn _ -> expand_paths(media_attrs["backdrop_path"]) end)
+    |> Map.update!(:poster_path, fn _ -> expand_paths(media_attrs["poster_path"]) end)
     |> update_id_key(:tmdb)
   end
 
-  defp create_chageset(attrs, model) do
+  defp format_audio_media_attrs(media_attrs) do
+  end
+
+  defp create_changeset(attrs, model) do
     case model do
       :visual -> VisualMedia.changeset(%VisualMedia{}, attrs)
+      :audio -> AudioMedia.changeset(%AudioMedia{}, attrs)
       _ -> {:ok, :bye}
     end
   end
