@@ -12,4 +12,4 @@
 
 ---
 
-- [ ] Environment variable for TMDB API KEY
+- [x] Environment variable for TMDB API KEY

@@ -24,12 +24,20 @@ defmodule EmiCore.Query.MediaQuery do
   end
 
   defp format_visual_media_attrs(media_attrs) do
-    media_attrs
-    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
-    |> Map.update!(:release_date, fn _ -> to_utc_datetime!(media_attrs["release_date"]) end)
-    |> Map.update!(:backdrop_path, fn _ -> expand_paths(media_attrs["backdrop_path"]) end)
-    |> Map.update!(:poster_path, fn _ -> expand_paths(media_attrs["poster_path"]) end)
+    updated_media = media_attrs |> convert_keys_to_atoms()
+
+    updated_media
+    |> Map.update!(:release_date, fn _ ->
+      to_utc_datetime!(updated_media.release_date)
+    end)
+    |> Map.update!(:backdrop_path, fn _ -> expand_paths(updated_media.backdrop_path) end)
+    |> Map.update!(:poster_path, fn _ -> expand_paths(updated_media.poster_path) end)
     |> update_id_key(:tmdb)
+  end
+
+  defp convert_keys_to_atoms(attrs) do
+    attrs
+    |> Map.new(fn {k, v} -> if is_atom(k), do: {k, v}, else: {String.to_atom(k), v} end)
   end
 
   defp format_audio_media_attrs(media_attrs) do

@@ -36,11 +36,11 @@ defmodule EmiCore.ScannerTest do
 
       expected_media_names_paths = [
         %{
-          name: "avatar.mp4",
+          name: "avatar",
           path: "#{dir}/avatar.mp4"
         },
         %{
-          name: "Pacific Rim.mp4",
+          name: "Pacific Rim",
           path: "#{dir}/Pacific Rim.mp4"
         }
       ]
