@@ -20,7 +20,6 @@ defmodule EmiCore.Query.MediaQuery do
 
     Repo.insert(changeset)
 
-    # TODO after this we need to trigger a background job to fetch the specific information about the media and update the data.
   end
 
   defp format_visual_media_attrs(media_attrs) do

@@ -10,6 +10,7 @@
 - [ ] update schema
 - [ ] Perhaps we should schedule this to V2 of the app. Focus on visual media for now. 
 
----
+--- General ---
 
 - [x] Environment variable for TMDB API KEY
+- [ ] Check out Hammox for testing.
