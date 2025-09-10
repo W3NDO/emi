@@ -1,8 +1,8 @@
-defmodule EmiDb.SongMetadata do
+defmodule EmiDb.AudioMedia do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "song_metadata" do
+  schema "audio_media" do
     field(:title, :string)
     field(:release_date, :utc_datetime)
     field(:single, :boolean)
@@ -16,8 +16,8 @@ defmodule EmiDb.SongMetadata do
     timestamps()
   end
 
-  def changeset(song_metadata, attrs) do
-    song_metadata
+  def changeset(audio_media, attrs) do
+    audio_media
     |> cast(attrs, [
       :title,
       :release_date,

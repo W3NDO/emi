@@ -16,6 +16,10 @@
 # General application configuration
 import Config
 
+config :emi_core,
+  tmdb_read_access_token: System.get_env("TMDB_READ_ACCESS_TOKEN"),
+  tmdb_api_key: System.get_env("TMDB_KEY")
+
 config :emi_web,
   generators: [timestamp_type: :utc_datetime]
 

@@ -5,16 +5,19 @@ defmodule EmiDb.VisualMedia do
   schema "visual_media" do
     field(:title, :string)
     field(:original_title, :string)
-    field(:synopsis, :string)
+    field(:overview, :string)
     field(:release_date, :utc_datetime)
-    field(:language, :string)
+    field(:original_language, :string)
     field(:country, :string)
     field(:status, :string)
-    field(:backdrop_url, :string)
+    field(:backdrop_path, :string)
+    field(:adult, :boolean)
+    field(:poster_path, :string)
     field(:keywords, :string)
     field(:rating, :string)
     field(:tags, :string)
     field(:imdb_id, :string)
+    field(:tmdb_id, :string)
 
     # field :video_codec, :string
     # field :audio_codec, :string
@@ -38,18 +41,21 @@ defmodule EmiDb.VisualMedia do
     |> cast(attrs, [
       :title,
       :original_title,
-      :synopsis,
+      :overview,
       :release_date,
-      :language,
+      :original_language,
       :country,
       :status,
-      :backdrop_url,
+      :backdrop_path,
+      :adult,
+      :poster_path,
       :keywords,
       :rating,
       :tags,
-      :imdb_id
+      :imdb_id,
+      :tmdb_id
     ])
     |> validate_required([:title])
-    |> unique_constraint([:imdb_id])
+    |> unique_constraint([:imdb_id, :tmdb_id])
   end
 end

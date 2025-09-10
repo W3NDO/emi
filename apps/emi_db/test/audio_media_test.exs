@@ -1,6 +1,6 @@
-defmodule SongMetadataTest do
+defmodule AudioMediaTest do
   use ExUnit.Case, async: true
-  alias EmiDb.{SongMetadata, Repo}
+  alias EmiDb.{AudioMedia, Repo}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
@@ -17,7 +17,7 @@ defmodule SongMetadataTest do
       musicbrainz_id: "c9fdb94c-4975-4ed6-a96f-ef6d80bb7738"
     }
 
-    {:ok, _existing_song} = Repo.insert(SongMetadata.changeset(%SongMetadata{}, song_attrs))
+    {:ok, _existing_song} = Repo.insert(AudioMedia.changeset(%AudioMedia{}, song_attrs))
 
     {:ok, song_attrs: song_attrs}
   end
@@ -25,12 +25,12 @@ defmodule SongMetadataTest do
   test "Ensure uniqueness of Musicbrainz ID", %{
     song_attrs: song_attrs
   } do
-    changeset = SongMetadata.changeset(%SongMetadata{}, song_attrs)
+    changeset = AudioMedia.changeset(%AudioMedia{}, song_attrs)
 
     assert {:error, changeset} = Repo.insert(changeset)
 
     assert {"has already been taken",
-            [constraint: :unique, constraint_name: "song_metadata_musicbrainz_id_index"]} ==
+            [constraint: :unique, constraint_name: "audio_media_musicbrainz_id_index"]} ==
              changeset.errors[:musicbrainz_id]
   end
 end
