@@ -5,20 +5,21 @@ defmodule UserTest do
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
     existing_username = Faker.Internet.user_name()
+    existing_password = "this_is###4password"
 
     {:ok, existing_user} =
-      Repo.insert(User.changeset(%User{}, %{username: existing_username, role: "user"}))
+      Repo.insert(User.changeset(%User{}, %{username: existing_username, password_hash: existing_password, role: false}))
 
-    {:ok, existing_user: existing_user, existing_username: existing_username}
+    {:ok, existing_user: existing_user, existing_username: existing_username, existing_password: existing_password}
   end
 
   test "inserts a record" do
     username = Faker.Internet.user_name()
-    changeset = User.changeset(%User{}, %{username: username, role: "admin"})
+    changeset = User.changeset(%User{}, %{username: username, role: true, password_hash: "1234123"})
     {:ok, user} = Repo.insert(changeset)
 
     assert user.username == username
-    assert user.role == "admin"
+    assert user.role == true
     assert user
   end
 
@@ -29,11 +30,11 @@ defmodule UserTest do
 
   test "updates a record", %{existing_user: existing_user} do
     user = Repo.get(User, existing_user.id)
-    changeset = Ecto.Changeset.change(user, %{role: "admin"})
+    changeset = Ecto.Changeset.change(user, %{role: true})
     Repo.update(changeset)
     fetched = Repo.get(User, existing_user.id)
 
-    assert fetched.role == "admin"
+    assert fetched.role == true
   end
 
   test "deletes a record", %{existing_user: existing_user} do
@@ -42,8 +43,8 @@ defmodule UserTest do
     assert nil == Repo.get(User, existing_user.id)
   end
 
-  test "Ensures uniqueness constraint", %{existing_user: existing_user} do
-    duplicate_attrs = %{username: existing_user.username, role: "user"}
+  test "Ensures uniqueness constraint", %{existing_user: existing_user, existing_password: existing_password} do
+    duplicate_attrs = %{username: existing_user.username, role: false, password_hash: existing_password}
 
     changeset = User.changeset(%User{}, duplicate_attrs)
 

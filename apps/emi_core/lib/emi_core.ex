@@ -14,8 +14,7 @@ defmodule EmiCore do
       |> Enum.map(fn request_object -> Tmdb.make_request(request_object) end)
       |> Enum.map(fn {:ok, body} -> MediaQuery.insert_to_repo(body, :visual) end)
 
-      # TODO after this we need to trigger a background job to fetch the specific information about the media and update the data.
-
+    # TODO after this we need to trigger a background job to fetch the specific information about the media and update the data.
   end
 
   defp build_query_params(query, localisation \\ "en-UK", adult_flag \\ true) do

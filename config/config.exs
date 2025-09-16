@@ -91,3 +91,8 @@ config :emi_db, EmiDb.Repo,
   pool_size: 5
 
 config :emi_db, ecto_repos: [EmiDb.Repo]
+
+# Configuring guardian
+config :emi_db, EmiDb.Guardian,
+  issuer: "emi_db",
+  secret_key: "wudBrPN2MgoXkWp87q-u3A5PLx8tvDWSoXY764gHmWsevXCPsuxC7ZHlOOoeo3VD"

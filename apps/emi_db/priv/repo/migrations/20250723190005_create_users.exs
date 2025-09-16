@@ -4,7 +4,8 @@ defmodule EmiDb.Repo.Migrations.CreateUsers do
   def change do
     create table(:users) do
       add :username, :string, null: false
-      add :role, :string, null: false
+      add :password_hash, :string
+      add :role, :boolean, default: false, null: false
 
       timestamps()
     end

@@ -5,7 +5,8 @@ defmodule EmiCoreTest do
   alias EmiCore.Query.MediaQuery
 
   setup do
-    api_key = System.get_env("TMDB_READ_ACCESS_TOKEN") # remember to set the env variable before running this test.
+    # remember to set the env variable before running this test.
+    api_key = System.get_env("TMDB_READ_ACCESS_TOKEN")
 
     {:ok, api_key: api_key}
   end

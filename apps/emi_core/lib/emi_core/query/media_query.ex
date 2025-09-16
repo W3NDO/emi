@@ -19,7 +19,6 @@ defmodule EmiCore.Query.MediaQuery do
       end
 
     Repo.insert(changeset)
-
   end
 
   defp format_visual_media_attrs(media_attrs) do
