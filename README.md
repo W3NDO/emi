@@ -69,6 +69,10 @@ The umbrella is composed of several apps, each with a clearly defined role:
 - Depends on:
   - `emi_db`
 
+- Having this as a separate app would require using guardian or coherence for token/session based authentication respectively.
+
+- The alternative approach is removing this app entirely and separating how `phx.gen.auth` works, with all DB interaction logic in `emi_db` and user interactions in `emi_web`
+
 ---
 
 ### `emi_ingest`
