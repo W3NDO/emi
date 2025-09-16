@@ -18,11 +18,11 @@ defmodule EmiCore do
 
   end
 
-  defp build_query_params(query) do
+  defp build_query_params(query, localisation \\ "en-UK", adult_flag \\ true) do
     %{
       query: query,
-      include_adult: true,
-      language: "en-UK",
+      include_adult: adult_flag,
+      language: localisation,
       options: %{
         headers: [{"accept", "application/json"}, {"Authorization", "Bearer #{@api_key}"}]
       }
